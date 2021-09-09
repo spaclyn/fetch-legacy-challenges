@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchIndex from './SearchIndex';
 import { Container } from 'reactstrap';
+import './Search.css'
  
 const Search = () => {
    return (

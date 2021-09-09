@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
-import { Input, Button } from 'reactstrap';
+import { Input } from 'reactstrap';
 
 class SearchIndex extends Component {
   constructor(props){
     super(props)
     this.state = {
-      things: [],
-      thing: ''
+      thing: ['pen', 'marker', 'eraser', 'notebook', 'pencil', 'scissors', 'highlighter', 'stapler', 'paper clip', 'binder', 'hole punch', 'laminator', 'laminating sheets', 'protective sheets', 'index cards'],
+      newThing: []
     }
 
-    this.handleChange = this.handleChange.bind(this)
-    this.handleClick = this.handleClick.bind(this)
+    this.searchFunction = this.searchFunction.bind(this)
+    //this.handleClick = this.handleClick.bind(this)
   }
 
-  handleChange(e) {
+  /*handleChange(e) {
     this.setState({
       thing: e.target.value
     })
@@ -21,27 +21,34 @@ class SearchIndex extends Component {
 
   handleClick(e) {
     this.searchFunction()
-  }
+  }*/
 
-    componentDidMount() {
+    /*componentDidMount() {
       this.setState({
-        things: ['pen', 'marker', 'eraser', 'notebook', 'pencil', 'scissors', 'highlighter', 'stapler', 'paper clip', 'binder', 'hole punch', 'laminator', 'laminating sheets', 'protective sheets', 'index cards']
+        thing: ['pen', 'marker', 'eraser', 'notebook', 'pencil', 'scissors', 'highlighter', 'stapler', 'paper clip', 'binder', 'hole punch', 'laminator', 'laminating sheets', 'protective sheets', 'index cards']
       })
-    }
+    }*/
 
-    searchFunction(){
-      //removed 
-      console.log(this.state.things.filter(result => result == this.state.thing.value))
-      console.log(this.state.thing)
+    searchFunction(value) {
+      console.log(value);
+      let newThing = this.state.thing.filter(result => result.includes(value.toLowerCase()))
+        this.setState({
+          newThing: newThing
+        })
     }
+  
+    displaySearchItem = (newThing, thingId) => <li key={thingId}>{newThing}</li>
+
+
 
     render() {
       return(
         <div>
-          <Input placeholder ='Search Here' thing={this.state.value} onChange={this.handleChange} />
-          <Button onClick={this.handleClick}>Submit</Button>
-          <h3>Results:</h3>
-          {this.state.things}
+        <Input placeholder='Search' type='text' onChange={e => this.searchFunction(e.target.value)} />
+        <h2>Results:</h2>
+        {this.state.newThing && this.state.newThing.length > 0 ?
+        this.state.newThing.map(this.displaySearchItem) :
+        this.state.thing.map(this.displaySearchItem)}
         </div>
       )
     }

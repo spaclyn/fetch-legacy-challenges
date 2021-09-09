@@ -26,7 +26,6 @@ class DogPics extends Component {
     }
 
     componentDidMount(){
-        //this.dogPhoto()
         this.dogPhotos()
     }
 
@@ -35,10 +34,10 @@ class DogPics extends Component {
         return(
             <div>
                 {this.state.loaded ?
-                <img src={this.state.results} /> :
+                <img src={this.state.results} alt="Not Found" /> :
                 <p>"Loading Doggos..."</p>}
-                <br/>
-                <Button type='button' onClick={this.dogPhotos}>New Photo</Button>
+                <br/><br/>
+                <Button type='button' onClick={this.dogPhotos}>New Doggo</Button>
             </div>
         )
     }
